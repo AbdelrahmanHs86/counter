@@ -8,14 +8,14 @@ const counterReducer = createSlice(
         initialState: initState,
         reducers: {
             Increase(state, action) {
-                state = state + action.payload
+                state.counter += action.payload;
             },
             Decrease(state, action) {
-                state = state + action.payload
+                state.counter > 0 ? state.counter -= action.payload : state.counter = 0;
             },
         },
     }
 );
 
-export const { increase, decrease } = counterReducer.actions
+export const { Increase, Decrease } = counterReducer.actions
 export default counterReducer.reducer;
