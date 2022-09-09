@@ -1,20 +1,22 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Increase, Decrease } from './store/reducers/counterSlice';
+import { toggleAuth } from './store/reducers/authSlice';
 
-function Counter(props) {
+function Counter() {
     const dispatch = useDispatch();
-    const count = useSelector((state) => state);
+    const { counter, auth } = useSelector((state) => state);
 
-
+    console.log(auth.loggedin);
     return (
         <div>
-            <button onClick={() => { dispatch({ type: 'toggleCounter' }) }}>Hide / Show Counter</button>
+            <button onClick={() => { dispatch(toggleAuth()) }}> {auth.loggedin ? 'Logout' : 'Login'}</button>
             {
-                count.showCounter &&
+                auth.loggedin &&
                 <>
-                    <h2>Counter: <span>{count.counter}</span> </h2>
-                    <button onClick={() => { dispatch({ type: 'Increase', payload: 5 }) }}>Increase</button>
-                    <button onClick={() => { dispatch({ type: 'Decrease', payload: 2 }) }}>Decrease</button>
+                    <h2>Counter: <span>{counter.counter}</span> </h2>
+                    <button onClick={() => { dispatch(Increase(5)) }}>Increase</button>
+                    <button onClick={() => { dispatch(Decrease(2)) }}>Decrease</button>
                 </>
             }
 
