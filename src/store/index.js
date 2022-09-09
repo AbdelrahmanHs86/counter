@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 
 const initState = { counter: 0, showCounter: true };
 
@@ -18,7 +18,7 @@ const countReducer = (state = initState, action) => {
     return state;
 }
 
-const store = createStore(countReducer);
+const store = configureStore({ countReducer });
 
 
 
